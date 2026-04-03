@@ -1,5 +1,9 @@
 Invoice‑PO Reconciler> pip install psycopg2-binary python-dotenv
-
 Invoice‑PO Reconciler> python .\scripts\test_db_connection.py
-
 Invoice‑PO Reconciler> python .\scripts\apply_schema.py
+Invoice‑PO Reconciler> python .\scripts\seed_pos.py
+
+Invoice‑PO Reconciler\services\auth-service> uv venv .ipo_auth --python 3.12
+Invoice‑PO Reconciler\services\auth-service> .ipo_auth\Scripts\activate
+Invoice‑PO Reconciler\services\auth-service> uv pip install -r requirements.txt
+
