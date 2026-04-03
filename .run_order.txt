@@ -2,3 +2,4 @@ Invoice‑PO Reconciler> pip install psycopg2-binary python-dotenv
 
 Invoice‑PO Reconciler> python .\scripts\test_db_connection.py
 
+Invoice‑PO Reconciler> python .\scripts\apply_schema.py

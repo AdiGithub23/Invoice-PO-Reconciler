@@ -8,7 +8,7 @@ def main():
     load_dotenv()
     database_url = os.getenv("DATABASE_URL")
     if not database_url:
-        print("ERROR: DATABASE_URL not set in environment or .env")
+        print("✗ ERROR: DATABASE_URL not set in environment or .env")
         sys.exit(2)
 
     try:
@@ -17,18 +17,18 @@ def main():
         cur = conn.cursor()
         cur.execute("SELECT version();")
         ver = cur.fetchone()[0]
-        print("Postgres version:", ver)
+        print("√ Postgres version:", ver)
 
         cur.execute("SELECT 1;")
-        print("Test query result:", cur.fetchone()[0])
+        print("√ Test query result:", cur.fetchone()[0])
 
         cur.close()
         conn.close()
-        print("OK: Connected to database successfully.")
+        print("√ OK: Connected to database successfully.")
         sys.exit(0)
 
     except Exception as e:
-        print("ERROR: Could not connect to database:", e)
+        print("✗ ERROR: Could not connect to database:", e)
         sys.exit(1)
 
 
