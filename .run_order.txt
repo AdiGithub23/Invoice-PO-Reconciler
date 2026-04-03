@@ -6,4 +6,8 @@ Invoice‑PO Reconciler> python .\scripts\seed_pos.py
 Invoice‑PO Reconciler\services\auth-service> uv venv .ipo_auth --python 3.12
 Invoice‑PO Reconciler\services\auth-service> .ipo_auth\Scripts\activate
 Invoice‑PO Reconciler\services\auth-service> uv pip install -r requirements.txt
-
+Invoice‑PO Reconciler\services\auth-service> uvicorn main:app --port 8001 --reload
+{
+  "email": "admin1@gmail.com",
+  "password": "admin1_pwd"
+}

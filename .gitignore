@@ -2,3 +2,8 @@
 
 .env
 
+.ipo_auth/
+.ipo_api/
+.ipo_upload/
+.ipo_worker/
+
