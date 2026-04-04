@@ -35,12 +35,24 @@ def insert_user(email: str, password_hash: str):
 		conn.commit()
 		cur.close()
 		return row
-	except Exception as e:
-		print(f"✗ DB Error: {e}")
-		return None
-	finally:
+	except UniqueViolation:
+		# Let caller handle duplicate-email case
 		if conn:
+			conn.rollback()
 			conn.close()
+		raise
+	except Exception:
+		# Re-raise other exceptions to be handled upstream
+		if conn:
+			conn.rollback()
+			conn.close()
+		raise
+	finally:
+		if conn and not conn.closed:
+			try:
+				conn.close()
+			except Exception:
+				pass
 
 
 def fetch_user_by_email(email: str):
