@@ -23,3 +23,5 @@ Invoice‑PO Reconciler\services\upload-service> uv venv .ipo_upload --python 3.
 Invoice‑PO Reconciler\services\upload-service> .ipo_upload\Scripts\activate
 Invoice‑PO Reconciler\services\upload-service> uv pip install -r requirements.txt
 Invoice‑PO Reconciler\services\upload-service> uvicorn main:app --port 8002 --reload
+Invoice‑PO Reconciler\services\upload-service> curl.exe -X POST "http://localhost:8002/upload/invoice" -H "Authorization: Bearer <TOKEN>" -F "file=@test_files\Sample1.csv"
+

@@ -1,0 +1,2 @@
+invoice_number,vendor_name,invoice_amount,invoice_date,po_number
+INV-005,Paper Company,120.00,2025-04-02,PO5005
