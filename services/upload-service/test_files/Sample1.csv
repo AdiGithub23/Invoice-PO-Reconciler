@@ -1,0 +1,2 @@
+invoice_number,vendor_name,invoice_amount,invoice_date,po_number
+INV-001,Acme Corp,1000.00,2025-03-05,PO1001
