@@ -79,7 +79,16 @@ def upload_invoice(
         # Surface DB-specific errors
         if isinstance(e, OperationalError):
             raise HTTPException(status_code=502, detail="Database connection error")
-        raise HTTPException(status_code=500, detail="Failed to create job record")
+        
+        # Check for Foreign Key or Type errors specifically
+        error_msg = str(e).lower()
+        if "foreign key" in error_msg:
+            raise HTTPException(status_code=400, detail=f"Database integrity error: {str(e)}")
+        if "invalid input syntax for type uuid" in error_msg:
+            raise HTTPException(status_code=400, detail="Invalid User ID format (UUID expected)")
+            
+        raise HTTPException(status_code=500, detail=f"Failed to create job record: {str(e)}")
+
 
     # 4. Push to Redis Queue
     job_payload = {
