@@ -30,11 +30,10 @@ redis_client = redis.Redis(host=REDIS_HOST, port=REDIS_PORT, decode_responses=Tr
 ALLOWED_EXTENSIONS = {"pdf", "csv"}
 
 def get_db_conn():
-    # Add a short connect_timeout for cloud DB poolers
     return psycopg2.connect(DATABASE_URL, connect_timeout=10)
 
 
-@app.post("/upload/invoice")
+@app.post("/invoice")
 def upload_invoice(
     file: UploadFile = File(...), 
     user_id: str = Depends(get_current_user)
@@ -108,7 +107,7 @@ def upload_invoice(
     return {"job_id": job_id, "status": "pending", "message": "Upload successful, processing started."}
 
 
-@app.get("/upload/job/{job_id}")
+@app.get("/job/{job_id}")
 def get_status(job_id: str, user_id: str = Depends(get_current_user)):
     """Simple status check for the frontend."""
     try:
