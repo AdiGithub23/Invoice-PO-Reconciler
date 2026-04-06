@@ -75,7 +75,7 @@ def fetch_user_by_email(email: str):
 			conn.close()
 
 
-@app.post("/auth/register", status_code=201)
+@app.post("/register", status_code=201)
 def register(req: RegisterRequest):
 	hashed = hash_password(req.password)
 	try:
@@ -89,7 +89,7 @@ def register(req: RegisterRequest):
 		raise HTTPException(status_code=500, detail=str(e))
 
 
-@app.post("/auth/login")
+@app.post("/login")
 def login(req: LoginRequest):
 	row = fetch_user_by_email(req.email)
 	if not row:
