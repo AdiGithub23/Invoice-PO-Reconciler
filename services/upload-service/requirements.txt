@@ -6,3 +6,4 @@ python-jose[cryptography]
 python-dotenv
 boto3
 redis
+requests
