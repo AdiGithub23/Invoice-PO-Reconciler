@@ -23,5 +23,13 @@ Invoice‑PO Reconciler\services\upload-service> uv venv .ipo_upload --python 3.
 Invoice‑PO Reconciler\services\upload-service> .ipo_upload\Scripts\activate
 Invoice‑PO Reconciler\services\upload-service> uv pip install -r requirements.txt
 Invoice‑PO Reconciler\services\upload-service> uvicorn main:app --port 8002 --reload
-Invoice‑PO Reconciler\services\upload-service> curl.exe -X POST "http://localhost:8002/upload/invoice" -H "Authorization: Bearer <TOKEN>" -F "file=@test_files\Sample1.csv"
+Invoice‑PO Reconciler\services\upload-service> curl.exe -X POST "http://localhost:8002/upload/invoice" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwNTFjMWFiNy02MWYxLTQ2OTgtYTE1NC05Mzc2NzFlYzE1MjAiLCJpYXQiOjE3NzU0NDE1MDYsImV4cCI6MTc3NTUyNzkwNn0.7LCvpG-nRb1TiCF2vT01SzqscyCFbu2iUPuDRU2jcmo" -F "file=@test_files\Sample1.csv"
+
+Invoice‑PO Reconciler> python scripts/seed_po.py
+
+Invoice‑PO Reconciler\services\worker-service> uv venv .ipo_worker --python 3.12
+Invoice‑PO Reconciler\services\worker-service> .ipo_worker\Scripts\activate
+Invoice‑PO Reconciler\services\worker-service> uv pip install -r requirements.txt
+Invoice‑PO Reconciler\services\worker-service> python main.py
+<Upload an Invoice File>
 
