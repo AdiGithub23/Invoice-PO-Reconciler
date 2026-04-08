@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+  namespace: invoice-app
+data:
+  REDIS_HOST: "redis"
+  REDIS_PORT: "6379"
+  S3_BUCKET_NAME: "ipo-anomaly-store"
+  AWS_REGION: "ap-south-1"
+  AMOUNT_THRESHOLD_PCT: "5"
+  AUTH_SERVICE_URL: "http://auth-service:8001"
+  UPLOAD_SERVICE_URL: "http://upload-service:8002"
+

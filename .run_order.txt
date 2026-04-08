@@ -33,3 +33,61 @@ Invoice‑PO Reconciler\services\worker-service> uv pip install -r requirements.
 Invoice‑PO Reconciler\services\worker-service> python main.py
 <Upload an Invoice File>
 
+Invoice‑PO Reconciler\services\api-gateway> npm init -y
+Invoice‑PO Reconciler\services\api-gateway> npm i
+Invoice‑PO Reconciler\services\api-gateway> node index.js
+
+Invoice‑PO Reconciler\services\frontend> npx create-next-app@latest .
+Invoice‑PO Reconciler\services\frontend> npm run dev
+
+winget install Kubernetes.minikube
+New-Item -ItemType Directory -Path "F:\.minikube" -Force
+$env:MINIKUBE_HOME = "F:\.minikube"
+minikube start
+docker pull gcr.io/k8s-minikube/kicbase:v0.0.50
+minikube start
+minikube status
+kubectl get node
+
+minikube addons enable ingress
+minikube addons enable metrics-server
+
+& minikube -p minikube docker-env --shell powershell | Invoke-Expression
+
+docker build -t auth-service:v1 .\services\auth-service\
+docker build -t upload-service:v1 .\services\upload-service\
+docker build -t worker-service:v1 .\services\worker-service\
+docker build -t api-gateway:v1 .\services\api-gateway\
+docker build -t frontend:v1 .\services\frontend\
+docker images | findstr /I "auth-service upload-service worker-service api-gateway frontend"
+
+# 1. PostgreSQL URL
+[Convert]::ToBase64String([Text.Encoding]::UTF8.GetBytes('postgresql://postgres.wkpdmeayqsyhznaboaku:IPO_Reconciler_pwd@aws-1-ap-south-1.pooler.supabase.com:5432/postgres'))
+# 2. JWT Secret
+[Convert]::ToBase64String([Text.Encoding]::UTF8.GetBytes('your_jwt_secret_key_here'))
+# 3. AWS Access Key ID
+[Convert]::ToBase64String([Text.Encoding]::UTF8.GetBytes('AKIAYEBWZQGFHKY7L4TU'))
+# 4. AWS Secret Access Key
+[Convert]::ToBase64String([Text.Encoding]::UTF8.GetBytes('9YH9HLaLsUWmMZyzGrFezz6QCwEjhS3TBueu4sDX'))
+
+mkdir k8s
+minikube kubectl -- apply -f .\k8s\namespace.yaml
+minikube kubectl -- apply -f .\k8s\configmap.yaml
+minikube kubectl -- apply -f .\k8s\secrets.yaml
+minikube kubectl -- apply -f .\k8s\redis-deployment.yaml
+minikube kubectl -- get pods -n invoice-app
+minikube kubectl -- get svc -n invoice-app
+
+minikube kubectl -- apply -f .\k8s\auth-deployment.yaml
+minikube kubectl -- apply -f .\k8s\upload-deployment.yaml
+minikube kubectl -- apply -f .\k8s\worker-deployment.yaml
+minikube kubectl -- apply -f .\k8s\gateway-deployment.yaml
+minikube kubectl -- apply -f .\k8s\frontend-deployment.yaml
+minikube kubectl -- apply -f .\k8s\ingress.yaml
+minikube kubectl -- apply -f .\k8s\hpa.yaml
+
+minikube kubectl -- get pods -n invoice-app
+minikube kubectl -- get svc -n invoice-app
+minikube kubectl -- get ingress -n invoice-app
+minikube kubectl -- get hpa -n invoice-app
+
