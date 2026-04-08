@@ -91,3 +91,4 @@ minikube kubectl -- get svc -n invoice-app
 minikube kubectl -- get ingress -n invoice-app
 minikube kubectl -- get hpa -n invoice-app
 
+minikube tunnel
