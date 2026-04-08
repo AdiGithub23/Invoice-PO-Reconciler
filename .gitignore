@@ -8,3 +8,5 @@
 .ipo_worker/
 
 node_modules/
+
+secrets.yaml

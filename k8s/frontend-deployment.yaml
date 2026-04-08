@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+  namespace: invoice-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+      - name: frontend
+        image: frontend:v1
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 3000
+        env:
+        - name: NEXT_PUBLIC_API_URL
+          value: "http://127.0.0.1/api"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend
+  namespace: invoice-app
+spec:
+  selector:
+    app: frontend
+  ports:
+  - port: 3001
+    targetPort: 3000
