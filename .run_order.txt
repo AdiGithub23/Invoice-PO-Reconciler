@@ -33,3 +33,21 @@ Invoice‑PO Reconciler\services\worker-service> uv pip install -r requirements.
 Invoice‑PO Reconciler\services\worker-service> python main.py
 <Upload an Invoice File>
 
+Invoice‑PO Reconciler\services\api-gateway> npm init -y
+Invoice‑PO Reconciler\services\api-gateway> npm i
+Invoice‑PO Reconciler\services\api-gateway> node index.js
+
+Invoice‑PO Reconciler\services\frontend> npx create-next-app@latest .
+Invoice‑PO Reconciler\services\frontend> npm run dev
+
+winget install Kubernetes.minikube
+New-Item -ItemType Directory -Path "F:\.minikube" -Force
+$env:MINIKUBE_HOME = "F:\.minikube"
+minikube start
+docker pull gcr.io/k8s-minikube/kicbase:v0.0.50
+minikube start
+minikube status
+kubectl get node
+
+minikube addons enable ingress
+minikube addons enable metrics-server
