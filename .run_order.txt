@@ -62,13 +62,13 @@ docker build -t frontend:v1 .\services\frontend\
 docker images | findstr /I "auth-service upload-service worker-service api-gateway frontend"
 
 # 1. PostgreSQL URL
-[Convert]::ToBase64String([Text.Encoding]::UTF8.GetBytes('postgresql://postgres.wkpdmeayqsyhznaboaku:IPO_Reconciler_pwd@aws-1-ap-south-1.pooler.supabase.com:5432/postgres'))
+[Convert]::ToBase64String([Text.Encoding]::UTF8.GetBytes('<DATABASE_URL>'))
 # 2. JWT Secret
-[Convert]::ToBase64String([Text.Encoding]::UTF8.GetBytes('your_jwt_secret_key_here'))
+[Convert]::ToBase64String([Text.Encoding]::UTF8.GetBytes('<JWT_SECRET>'))
 # 3. AWS Access Key ID
-[Convert]::ToBase64String([Text.Encoding]::UTF8.GetBytes('AKIAYEBWZQGFHKY7L4TU'))
+[Convert]::ToBase64String([Text.Encoding]::UTF8.GetBytes('<AWS_ACCESS_KEY_ID>'))
 # 4. AWS Secret Access Key
-[Convert]::ToBase64String([Text.Encoding]::UTF8.GetBytes('9YH9HLaLsUWmMZyzGrFezz6QCwEjhS3TBueu4sDX'))
+[Convert]::ToBase64String([Text.Encoding]::UTF8.GetBytes('<AWS_SECRET_ACCESS_KEY>'))
 
 mkdir k8s
 minikube kubectl -- apply -f .\k8s\namespace.yaml
